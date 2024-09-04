@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DirectedGraphs", "DirectedG
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{7E71CB24-8876-43CB-B656-8F9750C7B27A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{6BFC342E-1E60-44B2-98B0-CA1A045F2457}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{7E71CB24-8876-43CB-B656-8F9750C7B27A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E71CB24-8876-43CB-B656-8F9750C7B27A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E71CB24-8876-43CB-B656-8F9750C7B27A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BFC342E-1E60-44B2-98B0-CA1A045F2457}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BFC342E-1E60-44B2-98B0-CA1A045F2457}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BFC342E-1E60-44B2-98B0-CA1A045F2457}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BFC342E-1E60-44B2-98B0-CA1A045F2457}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
