@@ -7,7 +7,7 @@ public class UnDirectedGraph<TKey> where TKey : IComparable<TKey>
     //TODO #4:  Declare a member variable/attribute called Nodes. Should store nodes of type GraphNode in a way that a node can be quickly
     //          found given its key. (Look in GraphNode.cs for TODO #1)
 
-    public string AsString()
+    public override string ToString()
     {
         //TODO #5: Concatenate all nodes converted to string
         return null;

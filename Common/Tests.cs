@@ -22,7 +22,7 @@ namespace Common
             graph.AddEdge("Maider", "Galder", 63.23);
             graph.AddEdge("Maider", "Alaitz", 87.12);
 
-            Console.WriteLine($"Test graph:\n{graph.AsString()}");
+            Console.WriteLine($"Test graph:\n{graph.ToString()}");
 
             Console.Write("Testing AddNode(), AddEdge(), NodeCount() and EdgeCount()...");
 
@@ -137,7 +137,7 @@ namespace Common
             graph.AddEdge("Maider", "Galder", 63.23);
             graph.AddEdge("Maider", "Alaitz", 87.12);
 
-            Console.WriteLine($"Test graph:\n{graph.AsString()}");
+            Console.WriteLine($"Test graph:\n{graph.ToString()}");
 
             Console.Write("Testing AddNode(), AddEdge(), NodeCount() and EdgeCount()...");
 
