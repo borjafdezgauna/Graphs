@@ -1,26 +1,31 @@
 using System;
 
 
-public class DirectedGraph<TKey> : UnDirectedGraph<TKey> where TKey : IComparable<TKey>
+public class DirectedGraph<TItem, TWeight> : UnDirectedGraph<TItem, TWeight> where TItem : IComparable<TItem>
 {
-    public override void AddEdge(TKey sourceKey, TKey destination, double weight)
+    public override void AddEdge(TItem sourceKey, TItem destination, TWeight weight)
     {
-        //TODO #13: Add a directed edge from source to destination
+        //TODO #24: Add a directed edge from source to destination
+        
     }
 
-    public override void RemoveNode(TKey nodeKey)
+    public override void RemoveNode(TItem nodeKey)
     {
-        //TODO #14: Remove the node with Key=nodeKey and any edge that starts from or ends on that node
+        //TODO #25: Remove the node with Key=nodeKey and any edge that starts from or ends on that node
+        
     }
 
-    public override void RemoveEdge(TKey sourceKey, TKey destination)
+    public override void RemoveEdge(TItem sourceKey, TItem destination)
     {
-        //TODO #15: Remove the edge from the source node to the destination node
+        //TODO #26: Remove the edge from the source node to the destination node
+        
     }
 
     public override int EdgeCount()
     {
-        //TODO #16: Return the number of edges in the graph
+        //TODO #27: Return the number of edges in the graph
+        
         return 0;
+        
     }
 }

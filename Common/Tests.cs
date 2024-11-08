@@ -3,11 +3,12 @@ using System.Diagnostics;
 
 namespace Common
 {
+    
     public class Tests
     {
         public static bool TestUnDirectedGraphs()
         {
-            UnDirectedGraph<string> graph = new UnDirectedGraph<string>();
+            UnDirectedGraph<string, double> graph = new UnDirectedGraph<string, double>();
 
             graph.AddNode("Maider");
             graph.AddNode("Itxaso");
@@ -122,7 +123,7 @@ namespace Common
 
         public static bool TestDirectedGraphs()
         {
-            DirectedGraph<string> graph = new DirectedGraph<string>();
+            DirectedGraph<string, double> graph = new DirectedGraph<string, double>();
 
             graph.AddNode("Maider");
             graph.AddNode("Itxaso");
@@ -283,48 +284,113 @@ namespace Common
                 calculator.AddDistance("Lizarra", "Iruñea", 44.4);
                 calculator.AddDistance("Lizarra", "Vitoria-Gasteiz", 72.4);
 
-                ////Distances from Vitoria-Gasteiz
-                //GenericBinaryTree<string, double> distances = calculator.CalculateDistances("Vitoria-Gasteiz");
+                //Distances from Vitoria-Gasteiz
+                IDictionary<string, double> distances = calculator.CalculateDistances("Vitoria-Gasteiz");
 
-                //if (Math.Abs(distances.Get("Donostia-SS") - 108.7) > 0.1)
-                //{
-                //    Console.WriteLine($"Calculated distance between \"Vitoria-Gasteiz\" and \"Donostia-SS\" is {distances.Get("Donostia-SS")} instead of 108.7");
-                //    return new SpeedMeasure() { Success = false };
-                //}
-                //if (Math.Abs(distances.Get("Lekeitio") - 136.6) > 0.1)
-                //{
-                //    Console.WriteLine($"Calculated distance between \"Vitoria-Gasteiz\" and \"Lekeitio\" is {distances.Get("Lekeitio")} instead of 136.6");
-                //    return new SpeedMeasure() { Success = false };
-                //}
-                //if (Math.Abs(distances.Get("Santander") - 165.1) > 0.1)
-                //{
-                //    Console.WriteLine($"Calculated distance between \"Vitoria-Gasteiz\" and \"Santander\" is {distances.Get("Lekeitio")} instead of 165.1");
-                //    return new SpeedMeasure() { Success = false };
-                //}
+                if (Math.Abs(distances.Get("Donostia-SS") - 108.7) > 0.1)
+                {
+                    Console.WriteLine($"Calculated distance between \"Vitoria-Gasteiz\" and \"Donostia-SS\" is {distances.Get("Donostia-SS")} instead of 108.7");
+                    return new SpeedMeasure() { Success = false };
+                }
+                if (Math.Abs(distances.Get("Lekeitio") - 136.6) > 0.1)
+                {
+                    Console.WriteLine($"Calculated distance between \"Vitoria-Gasteiz\" and \"Lekeitio\" is {distances.Get("Lekeitio")} instead of 136.6");
+                    return new SpeedMeasure() { Success = false };
+                }
+                if (Math.Abs(distances.Get("Santander") - 165.1) > 0.1)
+                {
+                    Console.WriteLine($"Calculated distance between \"Vitoria-Gasteiz\" and \"Santander\" is {distances.Get("Lekeitio")} instead of 165.1");
+                    return new SpeedMeasure() { Success = false };
+                }
 
-                ////Distances from Donostia-SS
-                //distances = calculator.CalculateDistances("Donostia-SS");
+                //Distances from Donostia-SS
+                distances = calculator.CalculateDistances("Donostia-SS");
 
-                //if (Math.Abs(distances.Get("Vitoria-Gasteiz") - 108.7) > 0.1)
-                //{
-                //    Console.WriteLine($"Calculated distance between \"Vitoria-Gasteiz\" and \"Donostia-SS\" is {distances.Get("Donostia-SS")} instead of 108.7");
-                //    return new SpeedMeasure() { Success = false };
-                //}
-                //if (Math.Abs(distances.Get("Lekeitio") - 116) > 0.1)
-                //{
-                //    Console.WriteLine($"Calculated distance between \"Vitoria-Gasteiz\" and \"Lekeitio\" is {distances.Get("Lekeitio")} instead of 116");
-                //    return new SpeedMeasure() { Success = false };
-                //}
-                //if (Math.Abs(distances.Get("Santander") - 212.9) > 0.1)
-                //{
-                //    Console.WriteLine($"Calculated distance between \"Donostia-SS\" and \"Santander\" is {distances.Get("Santander")} instead of 212.9");
-                //    return new SpeedMeasure() { Success = false };
-                //}
-
-                return new SpeedMeasure() { Success = false };
+                if (Math.Abs(distances.Get("Vitoria-Gasteiz") - 108.7) > 0.1)
+                {
+                    Console.WriteLine($"Calculated distance between \"Vitoria-Gasteiz\" and \"Donostia-SS\" is {distances.Get("Donostia-SS")} instead of 108.7");
+                    return new SpeedMeasure() { Success = false };
+                }
+                if (Math.Abs(distances.Get("Lekeitio") - 116) > 0.1)
+                {
+                    Console.WriteLine($"Calculated distance between \"Vitoria-Gasteiz\" and \"Lekeitio\" is {distances.Get("Lekeitio")} instead of 116");
+                    return new SpeedMeasure() { Success = false };
+                }
+                if (Math.Abs(distances.Get("Santander") - 212.9) > 0.1)
+                {
+                    Console.WriteLine($"Calculated distance between \"Donostia-SS\" and \"Santander\" is {distances.Get("Santander")} instead of 212.9");
+                    return new SpeedMeasure() { Success = false };
+                }
             }
 
             return new SpeedMeasure() { Success = true, Time = stopwatch.Elapsed.TotalSeconds };
+        }
+
+        private static bool CompareGraphs<TKey, TWeight>(UnDirectedGraph<TKey, TWeight> graph1,
+            UnDirectedGraph<TKey, TWeight> graph2, Action<string> onError) where TKey: IComparable<TKey>
+        {
+            if (graph1 == null || graph2 == null)
+            {
+                onError($"Something failed reading/writing a graph to disk. The graph read from file was null");
+                return false;
+            }
+            if (graph1.NodeCount() != graph2.NodeCount())
+            {
+                onError($"The original graph and the one read from file have a different number of elements ({graph1.NodeCount()} and {graph2.NodeCount()})");
+                return false;
+            }
+
+            foreach (TKey key in graph1.Elements())
+            {
+                TKey[] nodesInGraph1 = graph1.Elements();
+                TKey[] nodesInGraph2 = graph2.Elements();
+
+                foreach(TKey nodeKey in nodesInGraph1)
+                {
+                    GraphNode<TKey, TWeight> node1 = graph1.GetNode(nodeKey);
+                    GraphNode<TKey, TWeight> node2 = graph2.GetNode(nodeKey);
+                    if (node1 == null || node2 == null)
+                    {
+                        onError($"The nodes read from file are not equal to those in the original graph");
+                        return false;
+                    }
+
+                    TKey[] nodesConnectedToNode1 = node1.ConnectedElements();
+                    TKey[] nodesConnectedToNode2 = node2.ConnectedElements();
+                    if (nodesConnectedToNode1.Length != nodesConnectedToNode2.Length)
+                    {
+                        onError($"A node in the graph read from file didn't have the same number of edges as the original");
+                        return false;
+                    }
+
+                }
+            }
+            return true;
+        }
+
+
+        public static bool TestReaderWriter<TKey, TWeight>(UnDirectedGraph<TKey, TWeight> dictionary,
+            string filename,
+            Func<TKey, string> keyToString, Func<TWeight, string> valueToString,
+            Func<string, TKey> stringToKey, Func<string, TWeight> weightToValue,
+            Action<string> onError, Action<string> onNonErrorMessage) where TKey: IComparable<TKey>
+        {
+            GraphReaderWriter readerWriter = new GraphReaderWriter();
+            bool success = readerWriter.Write(dictionary, filename, (key) => keyToString(key), (value) => valueToString(value));
+            if (!success)
+                onError("Something went wrong writing the graph to a file");
+
+            UnDirectedGraph<TKey, TWeight> readFromFile = (UnDirectedGraph<TKey, TWeight>)Activator.CreateInstance(dictionary.GetType());
+
+            success = readerWriter.Read(readFromFile, filename, (keyString) => stringToKey(keyString), (valueString) => weightToValue(valueString));
+            if (!success)
+                onError("Something went wrong reading the graph from the file");
+
+            success = CompareGraphs(dictionary, readFromFile, onError);
+
+            if (success)
+                onNonErrorMessage("Ok");
+            return success;
         }
     }
 }
