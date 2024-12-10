@@ -26,10 +26,10 @@ namespace Tests
         public void WriteAndReadUndirectedGraphFromFile()
         {
             UnDirectedGraph<string, double> graph = new UnDirectedGraph<string, double>();
-            graph.AddNode("Jacinto");
-            graph.AddNode("Nerea");
-            graph.AddNode("Mertxe");
-            graph.AddNode("Pakito");
+            graph.AddVertex("Jacinto");
+            graph.AddVertex("Nerea");
+            graph.AddVertex("Mertxe");
+            graph.AddVertex("Pakito");
             graph.AddEdge("Jacinto", "Nerea", 12.50);
             graph.AddEdge("Jacinto", "Mertxe", 2.70);
             graph.AddEdge("Jacinto", "Pakito", 3.1);
@@ -45,10 +45,10 @@ namespace Tests
         public void WriteAndReadDirectedGraphFromFile()
         {
             DirectedGraph<string, int> graph = new DirectedGraph<string, int>();
-            graph.AddNode("Jacinto");
-            graph.AddNode("Nerea");
-            graph.AddNode("Mertxe");
-            graph.AddNode("Pakito");
+            graph.AddVertex("Jacinto");
+            graph.AddVertex("Nerea");
+            graph.AddVertex("Mertxe");
+            graph.AddVertex("Pakito");
             graph.AddEdge("Jacinto", "Nerea", 12);
             graph.AddEdge("Jacinto", "Mertxe", 2);
             graph.AddEdge("Jacinto", "Pakito", 3);
@@ -65,10 +65,10 @@ namespace Tests
         public void WriteAndReadUndirectedGraphWithSpecialCharactersFromFile()
         {
             UnDirectedGraph<string, double> graph = new UnDirectedGraph<string, double>();
-            graph.AddNode("Jacinto->Filomeno");
-            graph.AddNode("Nerea\nAlonsotegi");
-            graph.AddNode("Mertxe");
-            graph.AddNode("Pakito");
+            graph.AddVertex("Jacinto->Filomeno");
+            graph.AddVertex("Nerea\nAlonsotegi");
+            graph.AddVertex("Mertxe");
+            graph.AddVertex("Pakito");
             graph.AddEdge("Jacinto->Filomeno", "Nerea\nAlonsotegi", 12.50);
             graph.AddEdge("Jacinto->Filomeno", "Mertxe", 2.70);
             graph.AddEdge("Jacinto->Filomeno", "Pakito", 3.1);
@@ -84,10 +84,10 @@ namespace Tests
         public void WriteAndReadDirectedGraphWithSpecialCharactersFromFile()
         {
             DirectedGraph<string, int> graph = new DirectedGraph<string, int>();
-            graph.AddNode("Jacinto->Filomeno");
-            graph.AddNode("Nerea\nAlonsotegi");
-            graph.AddNode("Mertxe");
-            graph.AddNode("Pakito");
+            graph.AddVertex("Jacinto->Filomeno");
+            graph.AddVertex("Nerea\nAlonsotegi");
+            graph.AddVertex("Mertxe");
+            graph.AddVertex("Pakito");
             graph.AddEdge("Jacinto->Filomeno", "Nerea\nAlonsotegi", 12);
             graph.AddEdge("Jacinto->Filomeno", "Mertxe", 2);
             graph.AddEdge("Jacinto->Filomeno", "Pakito", 3);

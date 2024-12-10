@@ -10,10 +10,10 @@ namespace Common
         {
             UnDirectedGraph<string, double> graph = new UnDirectedGraph<string, double>();
 
-            graph.AddNode("Maider");
-            graph.AddNode("Itxaso");
-            graph.AddNode("Galder");
-            graph.AddNode("Alaitz");
+            graph.AddVertex("Maider");
+            graph.AddVertex("Itxaso");
+            graph.AddVertex("Galder");
+            graph.AddVertex("Alaitz");
 
             graph.AddEdge("Maider", "Itxaso", 5.2);
             graph.AddEdge("Itxaso", "Maider", 3.12);
@@ -25,12 +25,12 @@ namespace Common
 
             Console.WriteLine($"Test graph:\n{graph.ToString()}");
 
-            Console.Write("Testing AddNode(), AddEdge(), NodeCount() and EdgeCount()...");
+            Console.Write("Testing AddVertex(), AddEdge(), VertexCount() and EdgeCount()...");
 
-            int numVertices = graph.NodeCount();
+            int numVertices = graph.VertexCount();
             if (numVertices != 4)
             {
-                Console.WriteLine($"Error. NodeCount() returned {numVertices} instead of 4");
+                Console.WriteLine($"Error. VertexCount() returned {numVertices} instead of 4");
                 return false;
             }
 
@@ -92,23 +92,23 @@ namespace Common
             }
             Console.WriteLine("Ok.");
 
-            Console.Write("Testing RemoveNode() with existing edge...");
-            graph.RemoveNode("Galder");
-            numVertices = graph.NodeCount();
+            Console.Write("Testing RemoveVertex() with existing edge...");
+            graph.RemoveVertex("Galder");
+            numVertices = graph.VertexCount();
             if (numVertices != 3)
             {
-                Console.WriteLine($"Error. NodeCount() returned {numVertices} instead of 3");
+                Console.WriteLine($"Error. VertexCount() returned {numVertices} instead of 3");
                 return false;
             }
             numEdges = graph.EdgeCount();
             if (numEdges != 3)
             {
-                Console.WriteLine($"Error. RemoveNode() failed to remove edges connected to the vertex removed");
+                Console.WriteLine($"Error. RemoveVertex() failed to remove edges connected to the element removed");
                 return false;
             }
             Console.WriteLine("Ok.");
 
-            Console.Write("Testing RemoveNode() with non-existing edge...");
+            Console.Write("Testing RemoveVertex() with non-existing edge...");
             numEdges = graph.EdgeCount();
             if (numEdges != 3)
             {
@@ -125,10 +125,10 @@ namespace Common
         {
             DirectedGraph<string, double> graph = new DirectedGraph<string, double>();
 
-            graph.AddNode("Maider");
-            graph.AddNode("Itxaso");
-            graph.AddNode("Galder");
-            graph.AddNode("Alaitz");
+            graph.AddVertex("Maider");
+            graph.AddVertex("Itxaso");
+            graph.AddVertex("Galder");
+            graph.AddVertex("Alaitz");
 
             graph.AddEdge("Maider", "Itxaso", 5.2);
             graph.AddEdge("Itxaso", "Maider", 3.12);
@@ -140,12 +140,12 @@ namespace Common
 
             Console.WriteLine($"Test graph:\n{graph.ToString()}");
 
-            Console.Write("Testing AddNode(), AddEdge(), NodeCount() and EdgeCount()...");
+            Console.Write("Testing AddVertex(), AddEdge(), VertexCount() and EdgeCount()...");
 
-            int numVertices = graph.NodeCount();
+            int numVertices = graph.VertexCount();
             if (numVertices != 4)
             {
-                Console.WriteLine($"Error. NodeCount() returned {numVertices} instead of 4");
+                Console.WriteLine($"Error. VertexCount() returned {numVertices} instead of 4");
                 return false;
             }
 
@@ -208,23 +208,23 @@ namespace Common
             }
             Console.WriteLine("Ok.");
 
-            Console.Write("Testing RemoveNode() with existing edge...");
-            graph.RemoveNode("Galder");
-            numVertices = graph.NodeCount();
+            Console.Write("Testing RemoveVertex() with existing edge...");
+            graph.RemoveVertex("Galder");
+            numVertices = graph.VertexCount();
             if (numVertices != 3)
             {
-                Console.WriteLine($"Error. NodeCount() returned {numVertices} instead of 3");
+                Console.WriteLine($"Error. VertexCount() returned {numVertices} instead of 3");
                 return false;
             }
             numEdges = graph.EdgeCount();
             if (numEdges != 4)
             {
-                Console.WriteLine($"Error. RemoveNode() failed to remove edges from/to removed vertex");
+                Console.WriteLine($"Error. RemoveVertex() failed to remove edges from/to removed element");
                 return false;
             }
             Console.WriteLine("Ok.");
 
-            Console.Write("Testing RemoveNode() with non-existing edge...");
+            Console.Write("Testing RemoveVertex() with non-existing edge...");
             numEdges = graph.EdgeCount();
             if (numEdges != 4)
             {
@@ -326,40 +326,40 @@ namespace Common
             return new SpeedMeasure() { Success = true, Time = stopwatch.Elapsed.TotalSeconds };
         }
 
-        private static bool CompareGraphs<TKey, TWeight>(UnDirectedGraph<TKey, TWeight> graph1,
-            UnDirectedGraph<TKey, TWeight> graph2, Action<string> onError) where TKey: IComparable<TKey>
+        private static bool CompareGraphs<TElement, TWeight>(UnDirectedGraph<TElement, TWeight> graph1,
+            UnDirectedGraph<TElement, TWeight> graph2, Action<string> onError) where TElement: IComparable<TElement>
         {
             if (graph1 == null || graph2 == null)
             {
                 onError($"Something failed reading/writing a graph to disk. The graph read from file was null");
                 return false;
             }
-            if (graph1.NodeCount() != graph2.NodeCount())
+            if (graph1.VertexCount() != graph2.VertexCount())
             {
-                onError($"The original graph and the one read from file have a different number of elements ({graph1.NodeCount()} and {graph2.NodeCount()})");
+                onError($"The original graph and the one read from file have a different number of elements ({graph1.VertexCount()} and {graph2.VertexCount()})");
                 return false;
             }
 
-            foreach (TKey key in graph1.Elements())
+            foreach (TElement key in graph1.Elements())
             {
-                TKey[] nodesInGraph1 = graph1.Elements();
-                TKey[] nodesInGraph2 = graph2.Elements();
+                TElement[] elementsInGraph1 = graph1.Elements();
+                TElement[] elementsInGraph2 = graph2.Elements();
 
-                foreach(TKey nodeKey in nodesInGraph1)
+                foreach(TElement element in elementsInGraph1)
                 {
-                    GraphNode<TKey, TWeight> node1 = graph1.GetNode(nodeKey);
-                    GraphNode<TKey, TWeight> node2 = graph2.GetNode(nodeKey);
-                    if (node1 == null || node2 == null)
+                    Vertex<TElement, TWeight> vertex1 = graph1.GetVertex(element);
+                    Vertex<TElement, TWeight> vertex2 = graph2.GetVertex(element);
+                    if (vertex1 == null || vertex2 == null)
                     {
-                        onError($"The nodes read from file are not equal to those in the original graph");
+                        onError($"The vertices read from file are not equal to those in the original graph");
                         return false;
                     }
 
-                    TKey[] nodesConnectedToNode1 = node1.ConnectedElements();
-                    TKey[] nodesConnectedToNode2 = node2.ConnectedElements();
-                    if (nodesConnectedToNode1.Length != nodesConnectedToNode2.Length)
+                    TElement[] elementsConnectedToVertex1 = vertex1.ConnectedElements();
+                    TElement[] elementsConnectedToVertex2 = vertex2.ConnectedElements();
+                    if (elementsConnectedToVertex1.Length != elementsConnectedToVertex2.Length)
                     {
-                        onError($"A node in the graph read from file didn't have the same number of edges as the original");
+                        onError($"A vertex in the graph read from file didn't have the same number of edges as the original");
                         return false;
                     }
 

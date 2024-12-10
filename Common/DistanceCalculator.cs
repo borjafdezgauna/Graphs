@@ -9,7 +9,7 @@ public class DistanceCalculator
 
     public void AddCity(string city)
     {
-        //TODO #29: Add to the graph a node with the name of this city. This method will be called several times before calling CalculateDistances()
+        //TODO #29: Add to the graph a vertex with the name of this city. This method will be called several times before calling CalculateDistances()
         
     }
 
@@ -27,7 +27,7 @@ public class DistanceCalculator
         //Calculate the distance to each city in the graph from fromCity.The result is a binary tree where the key is the city and the value the distance
         //          a) Initialize variables: distanceToCity<string,double>, visited<string,bool> and nextCityCandidates<string,double>, currentCity
         //          b) While currentyCity != null
-        //          b.1)    Find candidates for next step calculating (updating nextCityCandidates) -> USE CheckAdjacentNodes()
+        //          b.1)    Find candidates for next step calculating (updating nextCityCandidates) -> USE CheckNeighbours()
         //          b.2)    Select the next city (the one with the min distance in nextCityCandidates) and update currentCity -> USE ChooseNextUnvisitedCity()
         
         return null;
@@ -42,8 +42,8 @@ public class DistanceCalculator
         
     }
 
-    private void CheckAdjacentNodes(IDictionary<string, double> distanceToCity, IDictionary<string, bool> visited,
-        IDictionary<string, double> nextCityCandidates, string currentNodeKey)
+    private void CheckNeighbours(IDictionary<string, double> distanceToCity, IDictionary<string, bool> visited,
+        IDictionary<string, double> nextCityCandidates, string currentCity)
     {
         //TODO #33: Add to nextCityCandidates all the neighbours of the currentCity, updating their distances in distanceToCity too
         

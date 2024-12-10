@@ -26,7 +26,7 @@ namespace Common
             {
                 TextWriter writer = File.CreateText(filename);
 
-                //TODO #22: Write first all the nodes as strings (one line each), then one empty line, and then each of the edges with the format "A->1->B" (one line each)
+                //TODO #22: Write first all the vertices as strings (one line each), then one empty line, and then each of the edges with the format "A->1->B" (one line each)
                 
 
                 writer.Close();
@@ -43,7 +43,7 @@ namespace Common
             {
                 TextReader reader = File.OpenText(filename);
 
-                //TODO #23: Read all the nodes first and, when you find an empty line, start reading edges
+                //TODO #23: Read all the vertices first and, when you find an empty line, start reading edges
                 //Edges will have the format "A->1->B", so you need to use line.Split("->") to receive the three different parts in an array
                 
                 reader.Close();
