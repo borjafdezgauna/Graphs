@@ -56,7 +56,7 @@ public class UnDirectedGraph<TElement, TWeight> where TElement : IComparable<TEl
 
     public TWeight GetEdgeWeight(TElement source, TElement destination)
     {
-        //TODO #16: Return the weight of the edge going from the source vertex to the destination vertex.
+        //TODO #16: Return the number of edges. Edges are stored in each vertex, so vertices need to be traversed to count edges
         
         return default;
         
